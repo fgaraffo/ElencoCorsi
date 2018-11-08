@@ -12,7 +12,7 @@ import it.polito.tdp.corsi.model.Corso;
 
 public class CorsoDAO {
 
-	private final String jdbcURL = "jdbc:mysql://localhost/iscritticorsi?user=root&password=fede";
+	private final String jdbcURL = "jdbc:mysql://localhost/iscritticorsi?user=root&password=fede&serverTimezone=UTC";
 	
 	/**
 	 * Ritorna tutti gli elementi della tabella CORSO
@@ -23,7 +23,7 @@ public class CorsoDAO {
 		String sql = " SELECT codins,crediti,nome,pd " + 
 				"FROM corso;";
 		
-		List <Corso> result = new ArrayList ();
+		List <Corso> result = new ArrayList <Corso> ();
 		
 		try {
 			Connection conn = DriverManager.getConnection(jdbcURL);
@@ -44,7 +44,8 @@ public class CorsoDAO {
 			conn.close();
 		
 		} catch (SQLException e) {
-			return null;
+			throw new RuntimeException(e);
+			//return null;
 		}
 		
 		return result;
@@ -57,8 +58,38 @@ public class CorsoDAO {
 	 */
 	public List<Corso> listByPD(int pd) 
 	{
+		String sql = "SELECT codins,crediti,nome,pd " + 
+				"FROM corso " + 
+				"WHERE pd=?;";
 		
-		return null;
+		List <Corso> result = new ArrayList <Corso> ();
+		
+		try {
+			Connection conn = DriverManager.getConnection(jdbcURL);
+		
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, pd);
+		 
+			ResultSet res = st.executeQuery();
+		
+			while(res.next())
+			{
+				Corso c = new Corso(res.getString("codins"),
+									res.getInt("crediti"),
+									res.getString("nome"),
+									res.getInt("pd"));
+				result.add(c);
+			}
+		
+			conn.close();
+		
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+			//return null; 
+		}
+		
+		return result;
+		
 	}
 
 }

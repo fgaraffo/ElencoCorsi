@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="it.polito.tdp.corsi.CorsiController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.corsi.CorsiController">
    <top>
       <Label text="Elenco corsi" BorderPane.alignment="CENTER" />
    </top>
@@ -29,7 +28,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="handleCerca" mnemonicParsing="false" text="Cerca">
+                  <Button mnemonicParsing="false" onAction="#handleCerca" text="Cerca">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>

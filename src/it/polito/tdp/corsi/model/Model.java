@@ -8,14 +8,15 @@ import it.polito.tdp.corsi.db.CorsoDAO;
 public class Model {
 
 	private List <Corso> corsi;
-	
+		
 	public List <Corso> listaCorsiSemestre (int pd)
 	{
 		CorsoDAO dao = new CorsoDAO();
-		
+				
 		// opzione 1: leggo tutto e filtro qui
-		this.corsi = dao.listAll();
-		List <Corso> risultato = new ArrayList<>();
+/*		this.corsi = dao.listAll();
+		List <Corso> risultato = new ArrayList<Corso>();
+		
 		for (Corso c : this.corsi)
 		{
 			if (c.getPd() == pd)
@@ -24,11 +25,11 @@ public class Model {
 			}
 		}
 		return risultato;
-
+*/
 		// opzione 2: lo fa il database
 	
-	//	List <Corso> risultato2 = dao.listByPD(pd);
-	//	return risultato2;
+		List <Corso> risultato2 = dao.listByPD(pd);
+		return risultato2;
 	}
 	
 	
