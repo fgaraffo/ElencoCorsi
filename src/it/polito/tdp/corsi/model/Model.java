@@ -9,10 +9,12 @@ public class Model {
 
 	private List <Corso> corsi;
 	private CorsoDAO corsoDAO;
+	private StudenteDAO studenteDAO;
 	
 	public Model ()
 	{
 		this.corsoDAO = new CorsoDAO();
+		this.studenteDAO = new StudenteDAO();
 	}
 	
 	public List <Corso> listaCorsiSemestre (int pd)
@@ -35,6 +37,16 @@ public class Model {
 	
 		List <Corso> risultato2 = corsoDAO.listByPD(pd);
 		return risultato2;
+	}
+
+	public String getNomeCognomeByMatricola(int matricola) {
+		
+		Studente studente = studenteDAO.getStudenteByMatricola(matricola);
+		if (studente==null)
+		{
+			return "Non ho trovato nessuno studente associato alla matricola "+matricola;
+		}
+		return studente.getNome()+" - "+studente.getCognome();
 	}
 	
 	

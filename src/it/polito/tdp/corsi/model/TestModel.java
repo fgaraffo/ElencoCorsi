@@ -13,6 +13,12 @@ public class TestModel {
 		for (Corso c : corsi)
 			System.out.println(c);
 
+		int matricola = 172040;
+		String result = m.getNomeCognomeByMatricola(matricola);
+		System.out.println("Matricola: "+matricola+" - nome cognome: "+result);
+		
+		result = m.getNomeCognomeByMatricola(172089);
+		System.out.println("Matricola: 172089 - nome cognome: "+result);
 	}
 
 }
