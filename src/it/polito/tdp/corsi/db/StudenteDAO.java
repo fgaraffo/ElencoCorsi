@@ -1,4 +1,4 @@
-package it.polito.tdp.corsi.model;
+package it.polito.tdp.corsi.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polito.tdp.corsi.db.ConnectDB;
+import it.polito.tdp.corsi.model.Studente;
 
 public class StudenteDAO {
 

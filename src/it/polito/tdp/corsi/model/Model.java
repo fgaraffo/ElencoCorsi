@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polito.tdp.corsi.db.CorsoDAO;
+import it.polito.tdp.corsi.db.StudenteDAO;
 
 public class Model {
 
@@ -47,6 +48,26 @@ public class Model {
 			return "Non ho trovato nessuno studente associato alla matricola "+matricola;
 		}
 		return studente.getNome()+" - "+studente.getCognome();
+	}
+
+	public String getStatisticheFromCorsi() {
+		
+		this.corsi = corsoDAO.listAll();
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for (Corso c : this.corsi)
+		{
+			Statistiche stat = corsoDAO.getStatisticheByCodins(c.getCodIns());
+			sb.append("CodIns: "+c.getCodIns()+"\n");
+			for (String cds : stat.getMappaCDS().keySet()) // keyset restituisce set di chiavi data la mappa
+			{
+				sb.append(" - "+cds+" "+ stat.getMappaCDS().get(cds)+"\n");
+			}
+			sb.append("\n");
+		}
+		
+		return sb.toString();
 	}
 	
 	

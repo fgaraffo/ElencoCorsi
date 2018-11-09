@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polito.tdp.corsi.model.Corso;
+import it.polito.tdp.corsi.model.Statistiche;
 
 public class CorsoDAO {
 
@@ -87,6 +88,36 @@ public class CorsoDAO {
 		}
 		
 		return result;
+		
+	}
+
+	public Statistiche getStatisticheByCodins(String codIns) {
+		
+		String sql = "SELECT CDS, COUNT(CDS) as count " + 
+				"FROM studente as s, iscrizione as i " + 
+				"WHERE s.matricola = i.matricola AND i.codins = ? AND cds<> \"\"" + 
+				"GROUP BY CDS;";
+		
+		Statistiche stat = new Statistiche();
+	
+		try
+		{
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, codIns);
+			ResultSet res = st.executeQuery();
+						
+			while (res.next())
+			{
+				stat.getMappaCDS().put(res.getString("CDS"), res.getInt("count"));		
+			}
+			conn.close();
+		}
+		catch (SQLException e)
+		{
+			throw new RuntimeException(e);
+		}
+		return stat;
 		
 	}
 
