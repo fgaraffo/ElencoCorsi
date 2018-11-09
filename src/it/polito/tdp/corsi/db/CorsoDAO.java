@@ -12,8 +12,6 @@ import it.polito.tdp.corsi.model.Corso;
 
 public class CorsoDAO {
 
-	private final String jdbcURL = "jdbc:mysql://localhost/iscritticorsi?user=root&password=fede&serverTimezone=UTC";
-	
 	/**
 	 * Ritorna tutti gli elementi della tabella CORSO
 	 * @return
@@ -26,7 +24,7 @@ public class CorsoDAO {
 		List <Corso> result = new ArrayList <Corso> ();
 		
 		try {
-			Connection conn = DriverManager.getConnection(jdbcURL);
+			Connection conn = ConnectDB.getConnection();
 		
 			PreparedStatement st = conn.prepareStatement(sql);
 		
@@ -65,7 +63,7 @@ public class CorsoDAO {
 		List <Corso> result = new ArrayList <Corso> ();
 		
 		try {
-			Connection conn = DriverManager.getConnection(jdbcURL);
+			Connection conn = ConnectDB.getConnection();
 		
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, pd);
