@@ -20,7 +20,7 @@ public class StudenteDAO {
 		Studente result = null;
 		
 		try {
-			Connection conn = ConnectDB.getConnection();
+			Connection conn = ConnectDBCP.getConnection();
 		
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, m);

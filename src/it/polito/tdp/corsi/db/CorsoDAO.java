@@ -25,7 +25,7 @@ public class CorsoDAO {
 		List <Corso> result = new ArrayList <Corso> ();
 		
 		try {
-			Connection conn = ConnectDB.getConnection();
+			Connection conn = ConnectDBCP.getConnection();
 		
 			PreparedStatement st = conn.prepareStatement(sql);
 		
